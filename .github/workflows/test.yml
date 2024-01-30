@@ -10,6 +10,8 @@ on:
     branches: [ "master" ]
 
 jobs:
+  Explore-GitHub-Actions:
+    runs-on: self-hosted
   build:
 
     runs-on: ubuntu-latest
