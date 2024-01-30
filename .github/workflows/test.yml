@@ -43,7 +43,7 @@ jobs:
           SSH_USER: ec2-user
 
       - name: SSH into EC2 and Run Docker Container
-        run: ssh "$SSH_USER"@"$SSH_KNOWN_HOSTS" "touch /tmp/action"
+        run: ssh  -o StrictHostKeyChecking=no  "$SSH_USER"@"$SSH_KNOWN_HOSTS" "touch /tmp/action"
         env:
           SSH_KNOWN_HOSTS: 3.79.167.119
           SSH_USER: ec2-user
