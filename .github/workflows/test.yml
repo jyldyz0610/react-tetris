@@ -30,4 +30,4 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - name: Deploy App
-      run: sudo rsync -a ./build/ /var/www/html
+      run: sudo rsync -a ./dist/ /var/www/html
