@@ -25,8 +25,8 @@ jobs:
       - name: Create SSH key
         run: |
           mkdir -p ~/.ssh/
-          echo "$AWS_SECRET_KEY" > ../private.key
-          sudo chmod 600 ../private.key
+          echo "$AWS_SECRET_KEY" > ~/.ssh/private.key
+          sudo chmod 600 ~/.ssh/private.key
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           cat >>~/.ssh/config <<END
           Host 3.79.167.119
@@ -38,7 +38,7 @@ jobs:
         shell: bash
         env:
           AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
-          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+          SSH_KEY_PATH: ~/.ssh/private.key
           SSH_KNOWN_HOSTS: 3.79.167.119
           SSH_USER: ec2-user
 
