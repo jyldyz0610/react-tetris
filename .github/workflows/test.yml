@@ -29,6 +29,4 @@ jobs:
           username: ec2-user
           key: ${{secrets.AWS_SECRET_KEY}}
           port: 22
-          script: |
-            whoami
-            ls -al
+          script: whoami
