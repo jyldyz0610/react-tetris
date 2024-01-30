@@ -11,6 +11,7 @@
     "keymaster": "1.6.2"
   },
   "scripts": {
+    "start": "start",
     "build:lib": "tsc",
     "build:app": "esbuild app/main.tsx --bundle --outfile=dist/main.js",
     "watch": "npm run build:app -- --watch",
