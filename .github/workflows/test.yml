@@ -22,28 +22,13 @@ jobs:
           push: true
           tags: jyldyz0610/tetris-app:latest
 
-      - name: Create SSH key
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$AWS_SECRET_KEY" > ~/.ssh/private.key
-          sudo chmod 600 ~/.ssh/private.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          cat >>~/.ssh/config <<END
-          Host 3.79.167.119
-            HostName $SSH_KNOWN_HOSTS
-            User $SSH_USER
-            IdentityFile ~/.ssh/private.key
-            StrictHostKeyChecking no
-          END
-          cat ~/.ssh/private.key
-        env:
-          AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
-          SSH_KEY_PATH: ~/.ssh/private.key
-          SSH_KNOWN_HOSTS: 3.79.167.119
-          SSH_USER: ec2-user
-
-      - name: SSH into EC2 and Run Docker Container
-        run: ssh  -o StrictHostKeyChecking=no  "$SSH_USER"@"$SSH_KNOWN_HOSTS" "touch /tmp/action"
-        env:
-          SSH_KNOWN_HOSTS: 3.79.167.119
-          SSH_USER: ec2-user
+      - name: multiple command
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 3.79.167.119
+          username: ec2-user
+          key: ${{secrets.AWS_SECRET_KEY}}
+          port: 22
+          script: |
+            whoami
+            ls -al
