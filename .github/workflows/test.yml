@@ -21,9 +21,12 @@ jobs:
         with:
           push: true
           tags: jyldyz0610/tetris-app:latest
-          
+
       - name: Debugging Output
-        run: ssh -v -i ${{secrets.AWS_SECRET_KEY}} ec2-user@3.79.167.119 "whoami"
+        run: |
+          echo "Key Content: $AWS_SECRET_KEY"
+          echo "Key File Path: $HOME/.ssh/private.key" 
+          ssh -v -i ${{secrets.AWS_SECRET_KEY}} ec2-user@3.79.167.119 "whoami"
 
       - name: multiple command
         uses: appleboy/ssh-action@v1.0.3
