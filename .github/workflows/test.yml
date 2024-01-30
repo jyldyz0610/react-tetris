@@ -22,7 +22,25 @@ jobs:
           push: true
           tags: jyldyz0610/tetris-app:latest
 
-      - name: Copy Docker Image to EC2
-        run: scp -i AWS_SECRET_KEY -o StrictHostKeyChecking=no -r ./ jyldyz0610@3.79.167.119:/path/on/ec2
+      - name: Create SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$AWS_SECRET_KEY" > ../private.key
+          sudo chmod 600 ../private.key
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          cat >>~/.ssh/config <<END
+          Host 3.79.167.119
+            HostName $SSH_KNOWN_HOSTS
+            User $SSH_USER
+            IdentityFile ~/.ssh/private.key
+            StrictHostKeyChecking no
+          END
+        shell: bash
+        env:
+          AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
+          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+          SSH_KNOWN_HOSTS: 3.79.167.119
+          SSH_USER: ec2-user
+
       - name: SSH into EC2 and Run Docker Container
-        run: ssh -i AWS_SECRET_KEY -o StrictHostKeyChecking=no -p 8001 ec2-user@3.79.167.119 "docker run -d -p 8001:80 jyldyz0610/tetris-app:latest"
+        run: ssh ec2-user@3.79.167.119 "touch /tmp/action"
