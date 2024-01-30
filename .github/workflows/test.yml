@@ -20,7 +20,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: tetris-app:latest
-        env:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}        
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          tags: jyldyz0610/tetris-app:latest
