@@ -45,6 +45,8 @@ jobs:
           context: .
           push: true
           tags: tetris-app:${{ github.sha }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Deploy App
         run: sudo rsync -a ./dist/ /var/www/html
