@@ -21,3 +21,8 @@ jobs:
         with:
           push: true
           tags: jyldyz0610/tetris-app:latest
+
+      - name: Copy Docker Image to EC2
+        run: scp -i AWS_SECRET_KEY -o StrictHostKeyChecking=no -r ./ jyldyz0610@3.79.167.119:/path/on/ec2
+      - name: SSH into EC2 and Run Docker Container
+        run: ssh -i AWS_SECRET_KEY -o StrictHostKeyChecking=no -p 8001 ec2-user@3.79.167.119 "docker run -d -p 8001:80 jyldyz0610/tetris-app:latest"
