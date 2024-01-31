@@ -21,8 +21,7 @@ const App = () => (
     <h1>Tetris</h1>
     <Tetris
       keyboardControls={{
-        // Default values shown here. These will be used if no
-        // `keyboardControls` prop is provided.
+
         down: 'MOVE_DOWN',
         left: 'MOVE_LEFT',
         right: 'MOVE_RIGHT',
